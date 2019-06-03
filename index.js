@@ -25,16 +25,14 @@ $(function() {
    });
    
    // 4. Add event listener on existing element ul, specifically with class .shopping-item-toggle on button
-   // with event deletegation
-   $('ul').on('click', '.shopping-item-toggle', function(event){
-      // 4a. Get current target
-      const targetItem = $(this).parent().parent();
-      const otherItems = $('.shopping-item').not(targetItem);
-      otherItems.removeClass('shopping-item__checked');
-      targetItem.toggleClass('shopping-item__checked');
-   })
+   $('.shopping-list').on('click', '.shopping-item-toggle', function(event){
+      // 4a. From target get the li and find .shopping-item class
+      $(this).closest('li').find('.shopping-item').toggleClass('shopping-item__checked');
+   });
 
-   //    4b. If check is clicked again, toggle off .shopping class on text
    // 5. Add event listener on delete button with class .shopping-item-delete
-   // 6. Remove li item
+   $('.shopping-list').on('click', '.shopping-item-delete', function(event){
+      // 5a. From target get the li and remove it
+      $(this).closest('li').remove();
+   });
 })
