@@ -38,9 +38,28 @@ function renderShoppingList() {
    $('.js-shopping-list').html(shoppingListItemsString);
  } 
  
+function addItemToShoppingList(itemName){
+   console.log(`Adding "${itemName}" to the shopping list`);
+   STORE.push({id: cuid(), name: itemName, checked: false});
+}
+
  function handleNewItemSubmit() {
    // this function will be responsible for when users add a new shopping list item
    console.log('`handleNewItemSubmit` ran');
+   // set event listener on form on submit
+   $('#js-shopping-list-form').submit(function(event){
+      // prevent default page refresh on submit action
+      event.preventDefault();
+      console.log('`handlenewItemSubmit` ran');
+      // Get value entered by use from .js-shopping-list-entry
+      const newItemName = $('.js-shopping-list-entry').val();
+      $('.js-shopping-list-entry').val('');
+
+      // Update STORE and Re-render the shopping list
+      addItemToShoppingList(newItemName);
+      renderShoppingList();
+
+   });
  }
   
  function handleItemCheckClicked() {
